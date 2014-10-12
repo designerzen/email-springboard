@@ -1,0 +1,24 @@
+//- include mixins
+include email-mixins
+
+//- This is the basis for your responsive emails.
+//- Simply extend the sections
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+html(xmlns="http://www.w3.org/1999/xhtml")
+	head
+		meta(http-equiv="Content-Type", content="text/html; charset=utf-8")
+		meta(name="viewport", content="width=device-width")
+		
+		//- Replaced during the build process via Premailer
+		//- This is over-ridable if you wish to specify a *different* css file
+		block stylesheets
+			link(rel="stylesheet", href="email.css")
+		
+	body
+		table.body
+			tr
+				td(class="center" align="center" valign="top")
+					center
+						//- BLOCK EMAIL
+						block email
+							//- Email Content

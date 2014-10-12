@@ -1,0 +1,151 @@
+//-
+	Docs : ___________________________________________________________________________________________
+
+	Element Class Name 	Description
+	table 	container 	Constrains the content to a 580px wrapper on large screens (95% on small screens) and centers it within the body.
+	table 	row 		Separates each row of content.
+	td 		wrapper 	Wraps each .columns table, in order to create a gutter between columns and force them to expand to full width on small screens.
+	td 		last 		Class applied to the last .wrapper td in each row in order for the gutter to work properly. If you only have one (presumably full-width) .columns table (and therefore one .wrapper td) in a row, the .wrapper td still needs to have the last class applied to it.
+	table 	{number} 	Can be any number between one and twelve (spelled out). Used to determine how wide your .columns tables are. The number of columns in each row should add up to 12, including offset columns .
+	table 	columns 	Table that displays as n-twelfths of the width of the 580px .container table on large screens, and expands to the full width of the .container table on small screens.
+	td 		expander 	An empty (and invisible) element added after the content element in a .columns table. It forces the content td to expand to the full width of the screen on small devices, instead of just the width of the content within the td.
+
+	Number of Columns 	Internal Width (in px)
+	1 	30
+	2 	80
+	3 	130
+	4 	180
+	5 	230
+	6 	280
+	7 	330
+	8 	380
+	9 	430
+	10 	480
+	11 	530
+	12 	580
+
+
+//- Restrict width to 580px
+mixin container()
+	table.container
+		tr
+			td
+				if block
+					block
+
+//- Fill Containers with Rows!
+mixin row()
+	table.row
+		tr
+			if block
+				block
+				
+
+				
+//- Fill Rows with Columns!				
+mixin column( size, isLast, centralise, offset )
+	//- if (size === 'twelve') isLast = true;
+	- var offsetClass = (offset) ? 'offset-by-'+offset : '' 
+	- var lastClass = (isLast == true) ? 'wrapper last '+offsetClass : 'wrapper '+offsetClass 
+	td(class='#{lastClass}')
+		table( class="#{size} column" )
+			tr
+				if (centralise != false )
+					td.center
+						center
+							if block
+								block
+				else
+					td
+						if block
+							block
+							
+				td.expander
+
+mixin subrow()
+	tr
+				
+//- Fill Columns with Sub-Columns!				
+mixin subcolumn( size, isLast, centralise )
+	- var lastClass = (isLast == true) ? 'last' : '' 
+	if (centralise == true )
+		td( class="#{size} sub-columns center #{lastClass}" )
+			center
+				if block
+					block
+	else
+		td( class="#{size} sub-columns #{lastClass}" )
+			if block
+				block
+				
+	if (isLast == true) 
+		td.expander
+
+
+
+//- Create a Block Filled Element
+mixin panel()
+	td.panel
+		if block
+			block
+	td.expander
+	
+mixin expand
+	td.expander
+
+	
+mixin image( src, centralise )
+	if (centralise != false )
+		center
+			img(class="center", src=src)
+	else
+		img( src=src)
+
+
+mixin retinaImage( src, width, height, centralise )
+	if (centralise != false )
+		center
+			img( class="center", src=src, width=width, height=height )
+	else
+		img( src=src, width=width, height=height )
+	
+
+//- == BUTTONS ====================================================================================
+
+mixin button( link, name )
+	table( class!=attributes.class )
+		tr
+			td
+				
+				if block
+					a(href=link)= block
+				else
+					a(href=link)= name
+
+
+mixin tiny-button( link, name )
+	if (attributes.class)
+		+button( link, name )( class='tiny-button #{attributes.class}' )
+	else
+		+button( link, name )( class='tiny-button' )
+	
+
+mixin small-button( link, name )
+	if (attributes.class)
+		+button( link, name )( class='small-button #{attributes.class}' )
+	else
+		+button( link, name )( class='small-button' )
+	
+		
+mixin medium-button( link, name )
+	if (attributes.class)
+		+button( link, name )( class='medium-button #{attributes.class}' )
+	else
+		+button( link, name )( class='medium-button' )
+	
+		
+mixin large-button( link, name )
+	if (attributes.class)
+		+button( link, name )( class='large-button #{attributes.class}' )
+	else
+		+button( link, name )( class='large-button' )
