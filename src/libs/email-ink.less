@@ -2,23 +2,32 @@
 // Converted to Jade and Less by @designerzen
 // Configurable Variables. NB. You can overwrite these in your email.less
 
-@border-radius: 3px;
+@col-link:			#2ba6cb;
 
-@col-link:#2ba6cb;
+@col-text:			#222222;
 
-@col-text:#222222;
+@col-button:		#2795b6;
+@col-button-text:	#ffffff;
 
-@col-button:#2795b6;
-@col-button-text:#ffffff;
+@col-sucess:		#5da423;
+@col-sucess-border:	#457a1a;
 
-@col-sucess:#5da423;
-@col-sucess-border:#457a1a;
+@col-alert:			#c60f13;
+@col-alert-border:	#970b0e;
 
-@col-alert:#c60f13;
-@col-alert-border:#970b0e;
+@col-panel:			#f2f2f2;
+@col-panel-border:	#d9d9d9;
 
-@col-panel:#f2f2f2;
-@col-panel-border:#d9d9d9;
+@size-h1: 			40px;
+@size-h2: 			36px;
+@size-h3: 			32px;
+@size-h4: 			28px;
+@size-h5: 			24px;
+@size-h6: 			20px;
+@size-p:			18px;
+@size-small: 		10px;
+
+@border-radius: 	3px;
 
 /* Client-specific Styles & Reset */
 
@@ -101,6 +110,7 @@ table, tr, td {
 hr {
   color: #d9d9d9; 
   background-color: #d9d9d9; 
+  max-width: 580px;
   height: 1px; 
   border: none;
 }
@@ -352,16 +362,16 @@ h1, h2, h3, h4, h5, h6 {
   word-break: normal;
 }
 
-h1 {font-size: 40px;}
-h2 {font-size: 36px;}
-h3 {font-size: 32px;}
-h4 {font-size: 28px;}
-h5 {font-size: 24px;}
-h6 {font-size: 20px;}
+h1 {font-size: @size-h1;}
+h2 {font-size: @size-h2;}
+h3 {font-size: @size-h3;}
+h4 {font-size: @size-h4;}
+h5 {font-size: @size-h5;}
+h6 {font-size: @size-h6;}
 body, table.body, p, td {font-size: 14px;line-height:19px;}
 
 p.lead, p.lede, p.leed {
-  font-size: 18px;
+  font-size: @size-p;
   line-height:21px;
 }
 
@@ -370,7 +380,7 @@ p {
 }
 
 small {
-  font-size: 10px;
+  font-size:@size-small;
 }
 
 a {
@@ -541,6 +551,7 @@ table.large-button td a:visited {
   color: #ffffff !important; 
 }
 
+table td.secondary,
 table.secondary td {
   background: #e9e9e9;
   border-color: #d0d0d0;
@@ -597,6 +608,7 @@ table.round td {
 body.outlook p {
   display: inline !important;
 }
+
 
 /*  Media Queries */
 
@@ -707,4 +719,19 @@ body.outlook p {
   table[class="body"] .hide-for-desktop {
     display: inherit !important;
   }
+  
+	// A nice and clean way to target phone numbers you want clickable and avoid a mobile phone from linking other numbers that look like, but are not phone numbers.  Use these two blocks of code to "unstyle" any numbers that may be linked.  The second block gives you a class to apply with a span tag to the numbers you would like linked and styled. Inspired by Campaign Monitor's article on using phone numbers in email: http://www.campaignmonitor.com/blog/post/3571/using-phone-numbers-in-html-email/. 
+	a[href^="tel"], a[href^="sms"] {
+		text-decoration: none;
+		color: @col-text;
+		pointer-events: none;
+		cursor: default;
+	}
+
+	.mobile_link a[href^="tel"], .mobile_link a[href^="sms"] {
+		text-decoration: default;
+		color: orange !important; /* or whatever your want */
+		pointer-events: auto;
+		cursor: default;
+	}
 }

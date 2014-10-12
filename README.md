@@ -28,9 +28,10 @@ How to use
 * Install Ruby (mac and linux can skip this step)
 * Restart!
 * Run this command in a DOS prompt
-	gem install nokogiri
-	gem install premailer
-	npm install
+	- gem install nokogiri
+	- gem install premailer
+	- npm install
+	
 * Clone the Git repo
 * Edit the email contents in the email.jade file in the src folder
 * Edit the look of the email using the email.less file in the same folder
@@ -42,7 +43,24 @@ How to use
 * Paste into your mail sending client
 
 
+Compatibility
+---------------
+
+Apple Mail (Desktop)			✔ 	
+Apple Mail (iOS)				✔ 	
+Outlook (2000, 2002, 2003)		✔ 	
+Outlook (2007, 2010, 2013)		✔ 	
+Outlook (2011)					✔ 	
+Thunderbird						✔ 	
+Android							✔ 	
+Gmail (Desktop)					✔ 	
+Gmail (Mobile, iOS, Android) 	✔ 	_Does not fully support the Ink grid. Responsive layouts should be accomplished using the block-grid._
+Outlook 2011 for Mac 			✔ 	
+AOL Mail 						✔ 	
+Hotmail 						✔ 	
+Outlook.com 					✔ 	
 
 Contains work from :
 	* Zurb's Ink
 	* B.Less
+	* htmlemailboilerplate.com

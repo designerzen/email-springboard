@@ -7,6 +7,70 @@ Less 	-> 	CSS 3
 Jade 	-> 	xHTML
 
 
+Premailer Options : 
+
+	
+options.mode
+
+Type: String Default value: 'html'
+
+Output format. Either 'html' (HTML formatted email) or 'txt' (plaintext email).
+options.baseUrl
+
+Type: String Default value: ''
+
+Base URL to append to relative links.
+options.bundleExec
+
+Type: Boolean Default value: false
+
+Run premailer with bundle exec ruby.
+options.queryString
+
+Type: String Default value: ''
+
+Query string to append to links.
+options.css
+
+Type: Array Default value: []
+
+Additional CSS stylesheets to process. Paths are relative to the Gruntfile.js file. Any Grunt compatible globbing and template syntax is supported.
+options.removeClasses
+
+Type: Boolean Default value: false
+
+Removes HTML classes.
+options.removeScripts
+
+Type: Boolean Default value: false
+
+Removes HTML scripts. _(was true by default until v0.2.5)
+options.removeComments
+
+Type: Boolean Default value: false
+
+Removes HTML comments.
+options.preserveStyles
+
+Type: Boolean Default value: false
+
+Preserve any link rel=stylesheet and style elements.
+options.lineLength
+
+Type: Number Default value: 65
+
+Line length for plaintext version.
+options.ioException
+
+Type: Boolean Default value: false
+
+Aborts on I/O errors.
+options.verbose
+
+Type: Boolean Default value: false
+
+Prints additional information at runtime.
+
 */
 
 // =======================---------------- IMPORT DEPENDENCIES --------------------
@@ -32,6 +96,7 @@ var htmlmin = require('gulp-htmlmin');
 var del = require('del');						// delete things and folders
 var sequencer = require('run-sequence');
 
+var livereload = require('gulp-livereload');
 // =======================---------------- CONFIGURATION --------------------
 
 // Set up paths here!
@@ -43,6 +108,7 @@ var DISTRIBUTION_FOLDER 	= 'dist/';		// Once debugging is complete, copy to serv
 var source = {
 	styles 	: SOURCE_FOLDER+'*.less',
 	jade 	: SOURCE_FOLDER+'*.jade',
+	jade_examples 	: SOURCE_FOLDER+'examples/*.jade',
 	images	: SOURCE_FOLDER+'images/**/*'
 };
 
@@ -58,18 +124,22 @@ var imageCrunchOptions = {
 	progressive: false
 };
 
+var premailerOptions = {
+	mode:'txt'
+};
+
 var htmlSquishOptions = {
 	removeComments     : true,
 	collapseWhitespace : true,
 	minifyCSS          : true,
 	keepClosingSlash   : true
-}
+};
 
 // =======================---------------- TASK DEFINITIONS --------------------
 
 gulp.task('clean', function(cb) {
 	// You can use multiple globbing patterns as you would with `gulp.src`
-	del([BUILD_FOLDER+'**',DISTRIBUTION_FOLDER+'**'], cb);
+	del([BUILD_FOLDER,DISTRIBUTION_FOLDER], cb);
 });
 
 
@@ -78,13 +148,21 @@ gulp.task('jade', function() {
 	// Minify and copy all JavaScript (except vendor scripts)
 	// with sourcemaps all the way down
 	return 	gulp.src( source.jade )
-			.pipe( jade( { pretty:true, debug:false, compileDebug:false } ) )
+			.pipe( jade( { pretty:false, debug:false, compileDebug:false } ) )
+			.pipe( gulp.dest( destination.html ) );
+});
+
+gulp.task('compile-examples', function() {
+	// Minify and copy all JavaScript (except vendor scripts)
+	// with sourcemaps all the way down
+	return 	gulp.src( source.jade_examples )
+			.pipe( jade( { pretty:false, debug:false, compileDebug:false } ) )
 			.pipe( gulp.dest( destination.html ) );
 });
 
 gulp.task('assemble', function () {
     return 	gulp.src( destination.html +'*.html')
-			.pipe( premailer() )
+			.pipe( premailer(premailerOptions) )
 			.pipe( htmlmin(htmlSquishOptions) )
 			.pipe( gulp.dest(DISTRIBUTION_FOLDER) );
 });
@@ -120,12 +198,14 @@ gulp.task('css', function() {
 
 // Rerun the task when a file changes
 gulp.task('watch', function() {
-	gulp.watch( source.images, ['images'] );
-	gulp.watch( source.jade, ['jade'] );
-	gulp.watch( source.styles, ['css'] );
+
+  // Create LiveReload server
+  livereload.listen();
+
+  // Watch any files in dist/, reload on change
+  gulp.watch(['dist/**']).on('change', livereload.changed);
+
 });
-
-
 // =======================---------------- TASKS --------------------
 
 /*
@@ -142,8 +222,6 @@ gulp.task('watch', function() {
 
 7. Minify Images
 
-grunt build
-grunt deploy
 */
 
 
@@ -156,6 +234,15 @@ gulp.task('distribute', ['deploy'] );
 
 // create a server to host this project
 gulp.task('serve', 		['images', 'watch'] );
+
+// This creates the examples :)
+gulp.task('examples', function(callback) {
+	sequencer(
+		'clean',
+		[ 'css', 'compile-examples', 'images' ],
+		'assemble',
+    callback);
+});
 
 // The default task (called when you run `gulp` from cli)
 // As many of these tasks are not asynch

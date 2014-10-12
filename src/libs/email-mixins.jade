@@ -1,6 +1,6 @@
 //-
 	Docs : ___________________________________________________________________________________________
-
+	
 	Element Class Name 	Description
 	table 	container 	Constrains the content to a 580px wrapper on large screens (95% on small screens) and centers it within the body.
 	table 	row 		Separates each row of content.
@@ -9,7 +9,6 @@
 	table 	{number} 	Can be any number between one and twelve (spelled out). Used to determine how wide your .columns tables are. The number of columns in each row should add up to 12, including offset columns .
 	table 	columns 	Table that displays as n-twelfths of the width of the 580px .container table on large screens, and expands to the full width of the .container table on small screens.
 	td 		expander 	An empty (and invisible) element added after the content element in a .columns table. It forces the content td to expand to the full width of the screen on small devices, instead of just the width of the content within the td.
-
 	Number of Columns 	Internal Width (in px)
 	1 	30
 	2 	80
@@ -35,79 +34,122 @@ mixin container()
 
 //- Fill Containers with Rows!
 mixin row()
-	table.row
+	- var tableClasses = ( attributes.class ) ? 'row '+attributes.class : 'row';
+	table(class!=tableClasses )
 		tr
 			if block
 				block
-				
 
-				
-//- Fill Rows with Columns!				
+
+mixin fullWidthRow()
+	table.row
+		tr
+			td(class="center", align="center")
+				center
+					if block
+						block
+
+						
+//- Fill Rows with Columns!
 mixin column( size, isLast, centralise, offset )
-	//- if (size === 'twelve') isLast = true;
-	- var offsetClass = (offset) ? 'offset-by-'+offset : '' 
-	- var lastClass = (isLast == true) ? 'wrapper last '+offsetClass : 'wrapper '+offsetClass 
+	- var convertFromNumber = function( sizeInt ){ switch ( sizeInt ){ case 1:return 'one'; case 2:return 'two'; case 3:return 'three'; case 4:return 'four'; case 5:return 'five'; case 6:return 'six'; case 7:return 'seven'; case 8:return 'eight'; case 9:return 'nine'; case 10:return 'ten'; case 11:return 'eleven'; case 12: case 0: default: return 'twelve' } }
+	- var convertedSize = !isNaN(parseFloat(size)) && isFinite(size) ? convertFromNumber(size) : size
+	- var convertedOffset = !isNaN(parseFloat(offset)) && isFinite(offset) ? convertFromNumber(offset) : offset
+	- var lastColumn = isLast
+	- if (!convertedSize) convertedSize = 'twelve'
+	- if (convertedSize === 'twelve') lastColumn = true
+	- var offsetClass = (offset) ? 'offset-by-'+convertedOffset : '' 
+	- var lastClass = (lastColumn == true) ? 'wrapper last '+offsetClass : 'wrapper '+offsetClass 
+	- var tdClasses = (centralise == true ) ? 'center' : ''
+	- var tableClasses = 'column ' + convertedSize;
+	- if (attributes.class) tdClasses += ' '+attributes.class
 	td(class='#{lastClass}')
-		table( class="#{size} column" )
+		table( class!=tableClasses )
 			tr
-				if (centralise != false )
-					td.center
+				if (centralise == true )
+					td(class!=tdClasses )
 						center
 							if block
 								block
 				else
-					td
+					td(class!=tdClasses )
 						if block
 							block
 							
 				td.expander
 
-mixin subrow()
+mixin subgrid()
 	tr
-				
-//- Fill Columns with Sub-Columns!				
+
+
+//- Fill Columns with Sub-Columns!
 mixin subcolumn( size, isLast, centralise )
-	- var lastClass = (isLast == true) ? 'last' : '' 
+	- var convertFromNumber = function( sizeInt ){ switch ( sizeInt ){ case 1:return 'one'; case 2:return 'two'; case 3:return 'three'; case 4:return 'four'; case 5:return 'five'; case 6:return 'six'; case 7:return 'seven'; case 8:return 'eight'; case 9:return 'nine'; case 10:return 'ten'; case 11:return 'eleven'; case 12: case 0: default: return 'twelve' } }
+	- var convertedSize = !isNaN(parseFloat(size)) && isFinite(size) ? convertFromNumber(size) : size
+	- var lastClass = (isLast == true) ? 'last ' : '' 
 	if (centralise == true )
-		td( class="#{size} sub-columns center #{lastClass}" )
+		td( class="#{convertedSize} sub-columns center #{lastClass}" )
 			center
 				if block
 					block
 	else
-		td( class="#{size} sub-columns #{lastClass}" )
+		td( class="#{convertedSize} sub-columns #{lastClass}" )
 			if block
 				block
 				
 	if (isLast == true) 
 		td.expander
 
+		
+		
+		
+		
+//- two-up
+mixin blocks( quantity )
+	- var convertFromNumber = function( sizeInt ){ switch ( sizeInt ){ case 1:return 'one-up'; case 2:return 'two-up'; case 3:return 'three-up'; case 4:return 'four-up'; case 5:return 'five-up'; case 6:return 'six-up'; case 7:return 'seven-up'; case 8:return 'eight-up'; case 9:return 'nine-up'; case 10:return 'ten-up'; case 11:return 'eleven-up'; case 12: case 0: default: return 'twelve-up' } }
+	- var convertedSize = !isNaN(parseFloat(quantity)) && isFinite(quantity) ? convertFromNumber(quantity) : quantity
+	- var blockClasses = 'block-grid '+convertedSize
+	- if (attributes.class) blockClasses += ' '+attributes.class
+	table(class!=blockClasses)
+		tr
+			if block
+				block
+			
+mixin blockContent()
+	td( class!=attributes.class )
+		if block
+			block
+			
 
-
+			
+			
+			
 //- Create a Block Filled Element
 mixin panel()
-	td.panel
+	td.panel( class!=attributes.class )
 		if block
 			block
 	td.expander
-	
+
 mixin expand
 	td.expander
 
-	
-mixin image( src, centralise )
+//- NB. ENSURE that you have an alt tag!
+//- Alt text is the alternative text that appears when images aren’t loaded in an email
+mixin image( src, centralise, alt )
 	if (centralise != false )
 		center
-			img(class="center", src=src)
+			img(class="center", src=src, alt=alt )
 	else
-		img( src=src)
+		img( src=src, alt=alt)
 
 
-mixin retinaImage( src, width, height, centralise )
+mixin retinaImage( src, width, height, centralise, alt )
 	if (centralise != false )
 		center
-			img( class="center", src=src, width=width, height=height )
+			img( class="center", src=src, width=width, height=height, alt=alt )
 	else
-		img( src=src, width=width, height=height )
+		img( src=src, width=width, height=height, alt=alt )
 	
 
 //- == BUTTONS ====================================================================================
