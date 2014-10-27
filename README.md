@@ -1,5 +1,7 @@
-email-springboard
+Email Springboard
 =================
+
+Dive right in to a fast, clean and fun way to create responsive emails.
 
 A responsive email builder based around zurb's ink and some custom boilerplate code
 that uses as few dependencies as possible, but that leverages gulp, jade and less
@@ -37,8 +39,8 @@ How to use
 * Edit the look of the email using the email.less file in the same folder
 * Run gulp in a DOS prompt from the root of the folder
 	This will build and compile the files into 2 folders :
-	Build/ - where you can debug and test the look of your email
-	Dist/ - Where the email ends up once being compiled and squished
+		- Build/ - where you can debug and test the look of your email
+		- Dist/ - Where the email ends up once being compiled and squished
 * Copy the contents of the file created in dist folder
 * Paste into your mail sending client
 
@@ -54,13 +56,16 @@ Outlook (2011)					✔
 Thunderbird						✔ 	
 Android							✔ 	
 Gmail (Desktop)					✔ 	
-Gmail (Mobile, iOS, Android) 	✔ 	_Does not fully support the Ink grid. Responsive layouts should be accomplished using the block-grid._
+Gmail (Mobile, iOS, Android) 	✔ 	*
 Outlook 2011 for Mac 			✔ 	
 AOL Mail 						✔ 	
 Hotmail 						✔ 	
 Outlook.com 					✔ 	
 
+* _Does not fully support the Ink grid. Responsive layouts should be accomplished using the block-grid._
+
 Contains work from :
+---------------
 	* Zurb's Ink
 	* B.Less
 	* htmlemailboilerplate.com
