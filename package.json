@@ -26,6 +26,7 @@
     "gulp-minify": "0.0.5",
     "gulp-newer": "^1.1.0",
     "gulp-premailer": "^0.4.0",
-    "run-sequence": "^1.0.1"
+    "run-sequence": "^1.0.1",
+    "styliner": "^0.8.9"
   }
 }

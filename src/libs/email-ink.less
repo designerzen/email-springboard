@@ -31,47 +31,47 @@
 
 /* Client-specific Styles & Reset */
 
-#outlook a { 
-  padding:0; 
-} 
-
-body{ 
-  width:100% !important; 
-  min-width: 100%;
-  -webkit-text-size-adjust:100%; 
-  -ms-text-size-adjust:100%; 
-  margin:0; 
+#outlook a {
   padding:0;
 }
 
-.ExternalClass { 
-  width:100%;
-} 
-
-.ExternalClass, 
-.ExternalClass p, 
-.ExternalClass span, 
-.ExternalClass font, 
-.ExternalClass td, 
-.ExternalClass div { 
-  line-height: 100%; 
-} 
-
-#backgroundTable { 
-  margin:0; 
-  padding:0; 
-  width:100% !important; 
-  line-height: 100% !important; 
+body{
+  width:100% !important;
+  min-width: 100%;
+  -webkit-text-size-adjust:100%;
+  -ms-text-size-adjust:100%;
+  margin:0;
+  padding:0;
 }
 
-img { 
-  outline:none; 
-  text-decoration:none; 
+.ExternalClass {
+  width:100%;
+}
+
+.ExternalClass,
+.ExternalClass p,
+.ExternalClass span,
+.ExternalClass font,
+.ExternalClass td,
+.ExternalClass div {
+  line-height: 100%;
+}
+
+#backgroundTable {
+  margin:0;
+  padding:0;
+  width:100% !important;
+  line-height: 100% !important;
+}
+
+img {
+  outline:none;
+  text-decoration:none;
   -ms-interpolation-mode: bicubic;
   width: auto;
-  max-width: 100%; 
-  float: left; 
-  clear: both; 
+  max-width: 100%;
+  float: left;
+  clear: both;
   display: block;
 }
 
@@ -80,7 +80,7 @@ center {
   min-width: 580px;
 }
 
-a img { 
+a img {
   border: none;
 }
 
@@ -93,12 +93,13 @@ table {
   border-collapse: collapse;
 }
 
-td { 
-  word-break: break-word;
+td {
+  // word-break: break-word;
+  word-break: normal;
   -webkit-hyphens: auto;
   -moz-hyphens: auto;
   hyphens: auto;
-  border-collapse: collapse !important; 
+  border-collapse: collapse !important;
 }
 
 table, tr, td {
@@ -108,10 +109,10 @@ table, tr, td {
 }
 
 hr {
-  color: #d9d9d9; 
-  background-color: #d9d9d9; 
+  color: #d9d9d9;
+  background-color: #d9d9d9;
   max-width: 580px;
-  height: 1px; 
+  height: 1px;
   border: none;
 }
 
@@ -128,8 +129,8 @@ table.container {
   text-align: inherit;
 }
 
-table.row { 
-  padding: 0px; 
+table.row {
+  padding: 0px;
   width: 100%;
   position: relative;
 }
@@ -150,7 +151,7 @@ table.column {
 
 table.columns td,
 table.column td {
-  padding: 0px 0px 10px; 
+  padding: 0px 0px 10px;
 }
 
 table.columns td.sub-columns,
@@ -344,17 +345,17 @@ img.center {
 
 /* Typography */
 
-body, table.body, h1, h2, h3, h4, h5, h6, p, td { 
+body, table.body, h1, h2, h3, h4, h5, h6, p, td {
   color: @col-text;
- 
-  //font-family: "Helvetica", "Arial", sans-serif; 
-  //font-weight: normal; 
-  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+
+  //font-family: "Helvetica", "Arial", sans-serif;
+  //font-weight: normal;
+  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
   font-weight: 300;
-  
-  padding:0; 
+
+  padding:0;
   margin: 0;
-  text-align: left; 
+  text-align: left;
   line-height: 1.3;
 }
 
@@ -375,7 +376,7 @@ p.lead, p.lede, p.leed {
   line-height:21px;
 }
 
-p { 
+p {
   margin-bottom: 10px;
 }
 
@@ -384,48 +385,48 @@ small {
 }
 
 a {
-  color: @col-link; 
+  color: @col-link;
   text-decoration: none;
 }
 
-a:hover { 
+a:hover {
   color: @col-button !important;
 }
 
-a:active { 
+a:active {
   color: @col-button !important;
 }
 
-a:visited { 
+a:visited {
   color: @col-link !important;
 }
 
-h1 a, 
-h2 a, 
-h3 a, 
-h4 a, 
-h5 a, 
+h1 a,
+h2 a,
+h3 a,
+h4 a,
+h5 a,
 h6 a {
   color: @col-link;
 }
 
-h1 a:active, 
-h2 a:active,  
-h3 a:active, 
-h4 a:active, 
-h5 a:active, 
-h6 a:active { 
-  color: @col-link !important; 
-} 
+h1 a:active,
+h2 a:active,
+h3 a:active,
+h4 a:active,
+h5 a:active,
+h6 a:active {
+  color: @col-link !important;
+}
 
-h1 a:visited, 
-h2 a:visited,  
-h3 a:visited, 
-h4 a:visited, 
-h5 a:visited, 
-h6 a:visited { 
-  color: @col-link !important; 
-} 
+h1 a:visited,
+h2 a:visited,
+h3 a:visited,
+h4 a:visited,
+h5 a:visited,
+h6 a:visited {
+  color: @col-link !important;
+}
 
 /* Panels */
 
@@ -548,7 +549,7 @@ table.medium-button td a:visited,
 table.large-button:hover td a,
 table.large-button:active td a,
 table.large-button td a:visited {
-  color: #ffffff !important; 
+  color: #ffffff !important;
 }
 
 table td.secondary,
@@ -719,8 +720,8 @@ body.outlook p {
   table[class="body"] .hide-for-desktop {
     display: inherit !important;
   }
-  
-	// A nice and clean way to target phone numbers you want clickable and avoid a mobile phone from linking other numbers that look like, but are not phone numbers.  Use these two blocks of code to "unstyle" any numbers that may be linked.  The second block gives you a class to apply with a span tag to the numbers you would like linked and styled. Inspired by Campaign Monitor's article on using phone numbers in email: http://www.campaignmonitor.com/blog/post/3571/using-phone-numbers-in-html-email/. 
+
+	// A nice and clean way to target phone numbers you want clickable and avoid a mobile phone from linking other numbers that look like, but are not phone numbers.  Use these two blocks of code to "unstyle" any numbers that may be linked.  The second block gives you a class to apply with a span tag to the numbers you would like linked and styled. Inspired by Campaign Monitor's article on using phone numbers in email: http://www.campaignmonitor.com/blog/post/3571/using-phone-numbers-in-html-email/.
 	a[href^="tel"], a[href^="sms"] {
 		text-decoration: none;
 		color: @col-text;
