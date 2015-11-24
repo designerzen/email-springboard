@@ -25,22 +25,23 @@ Reason To Use
 
 How to use
 -------------
-
-* Install NodeJS
-* Install Ruby (mac and linux can skip this step)
-* Restart!
-* Run this command in a DOS prompt
-	- gem install nokogiri
-	- gem install premailer
-	- npm install
-	
-* Clone the Git repo
+* Download the Git repo from (Github)[https://github.com/designerzen/email-springboard.git]
+* Install (NodeJS)[https://nodejs.org/en/] (if you have not already installed it) 
+* Install (Ruby)[http://rubyinstaller.org/] if not installed _(mac and linux can skip this step)_
+* Restart your computer! *important*
+* Run this command in a DOS prompt :
+	> gem install nokogiri
+	> gem install premailer
+	> npm install
 * Edit the email contents in the email.jade file in the src folder
 * Edit the look of the email using the email.less file in the same folder
 * Run gulp in a DOS prompt from the root of the folder
+	> gulp
+
 	This will build and compile the files into 2 folders :
 		- Build/ - where you can debug and test the look of your email
 		- Dist/ - Where the email ends up once being compiled and squished
+
 * Copy the contents of the file created in dist folder
 * Paste into your mail sending client
 
