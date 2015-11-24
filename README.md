@@ -30,9 +30,11 @@ How to use
 * Install (Ruby)[http://rubyinstaller.org/] if not installed _(mac and linux can skip this step)_
 * Restart your computer! *important*
 * Run this command in a DOS prompt :
+
 	> gem install nokogiri
 	> gem install premailer
 	> npm install
+
 * Edit the email contents in the email.jade file in the src folder
 * Edit the look of the email using the email.less file in the same folder
 * Run gulp in a DOS prompt from the root of the folder
