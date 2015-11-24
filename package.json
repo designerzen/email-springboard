@@ -1,6 +1,6 @@
 {
   "name": "Email-SpringBoard",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "This is a project set-up using Gulp to take case of some standard tasks such as: compiling AMD based modules using RequireJS, watching/compiling Sass into CSS, watching/linting JS code and some other things such as running unit tests",
   "dependencies": {},
   "repository": {
@@ -25,7 +25,7 @@
     "gulp-livereload": "^2.1.1",
     "gulp-minify": "0.0.3",
     "gulp-newer": "^0.3.0",
-    "gulp-premailer": "^0.3.0",
+    "gulp-premailer": "^0.4.0",
     "run-sequence": "^1.0.1"
   }
 }
