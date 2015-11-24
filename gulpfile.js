@@ -7,9 +7,9 @@ Less 	-> 	CSS 3
 Jade 	-> 	xHTML
 
 
-Premailer Options : 
+Premailer Options :
 
-	
+
 options.mode
 
 Type: String Default value: 'html'
@@ -109,14 +109,17 @@ var source = {
 	styles 	: SOURCE_FOLDER+'*.less',
 	jade 	: SOURCE_FOLDER+'*.jade',
 	jade_examples 	: SOURCE_FOLDER+'examples/*.jade',
-	images	: SOURCE_FOLDER+'images/**/*'
+	images	: [
+		SOURCE_FOLDER+'**/*.+(ico|png|gif|jpg|jpeg|svg)',
+		'!'+SOURCE_FOLDER+'examples/**'
+	]
 };
 
 // Where shall we compile them to?
 var destination = {
 	styles 	: BUILD_FOLDER,
 	html 	: BUILD_FOLDER,
-	images	: BUILD_FOLDER+'img'
+	images	: BUILD_FOLDER
 };
 
 var imageCrunchOptions = {
@@ -212,13 +215,13 @@ gulp.task('watch', function() {
 
 // Assembly
 
-1. Compile css from less 
+1. Compile css from less
 2. Squish css
 
 3. Compile Jade templates
 4. Inject css into header
 5. Inline css into page elements
-6. Compress html 
+6. Compress html
 
 7. Minify Images
 
