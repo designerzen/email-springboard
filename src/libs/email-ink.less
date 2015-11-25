@@ -2,32 +2,36 @@
 // Converted to Jade and Less by @designerzen
 // Configurable Variables. NB. You can overwrite these in your email.less
 
-@col-link:			#2ba6cb;
+@col-link:		  	 #2ba6cb;
 
-@col-text:			#222222;
+@col-text:			   #222222;
 
-@col-button:		#2795b6;
-@col-button-text:	#ffffff;
+@col-button:	   	 #2795b6;
+@col-button-text:	 #ffffff;
 
-@col-sucess:		#5da423;
+@col-sucess:		    #5da423;
 @col-sucess-border:	#457a1a;
 
-@col-alert:			#c60f13;
+@col-alert:			    #c60f13;
 @col-alert-border:	#970b0e;
 
-@col-panel:			#f2f2f2;
+@col-panel:			    #f2f2f2;
 @col-panel-border:	#d9d9d9;
 
-@size-h1: 			40px;
-@size-h2: 			36px;
-@size-h3: 			32px;
-@size-h4: 			28px;
-@size-h5: 			24px;
-@size-h6: 			20px;
-@size-p:			18px;
-@size-small: 		10px;
+@size-h1: 			   40px;
+@size-h2: 			   36px;
+@size-h3: 			   32px;
+@size-h4: 			   28px;
+@size-h5: 			   24px;
+@size-h6: 			   20px;
+@size-p:		       18px;
+@size-small: 		   10px;
 
-@border-radius: 	3px;
+@border-radius: 	 3px;
+
+
+@minimum-width:     590px;
+@padding:           10px;
 
 /* Client-specific Styles & Reset */
 
@@ -77,7 +81,7 @@ img {
 
 center {
   width: 100%;
-  min-width: 580px;
+  min-width: @minimum-width;
 }
 
 a img {
@@ -85,7 +89,7 @@ a img {
 }
 
 p {
-  margin: 0 0 0 10px;
+  margin: 0 0 0 @padding;
 }
 
 table {
@@ -111,7 +115,7 @@ table, tr, td {
 hr {
   color: #d9d9d9;
   background-color: #d9d9d9;
-  max-width: 580px;
+  max-width: @minimum-width;
   height: 1px;
   border: none;
 }
@@ -124,7 +128,7 @@ table.body {
 }
 
 table.container {
-  width: 580px;
+  width: @minimum-width;
   margin: 0 auto;
   text-align: inherit;
 }
@@ -140,7 +144,7 @@ table.container table.row {
 }
 
 td.wrapper {
-  padding: 10px 20px 0px 0px;
+  padding: @padding 2*@padding 0px 0px;
   position: relative;
 }
 
@@ -151,14 +155,14 @@ table.column {
 
 table.columns td,
 table.column td {
-  padding: 0px 0px 10px;
+  padding: 0px 0px @padding;
 }
 
 table.columns td.sub-columns,
 table.column td.sub-columns,
 table.columns td.sub-column,
 table.column td.sub-column {
-  padding-right: 10px;
+  padding-right: @padding;
 }
 
 td.sub-column, td.sub-columns {
@@ -169,6 +173,10 @@ table.row td.last,
 table.container td.last {
   padding-right: 0px;
 }
+
+// Ensure that @minimum-width / 12
+@column-gap : @minimum-width / 12;
+@column-width : @minimum-width / 12;
 
 table.one { width: 30px; }
 table.two { width: 80px; }
@@ -181,7 +189,7 @@ table.eight { width: 380px; }
 table.nine { width: 430px; }
 table.ten { width: 480px; }
 table.eleven { width: 530px; }
-table.twelve { width: 580px; }
+table.twelve { width: @minimum-width; }
 
 table.one center { min-width: 30px; }
 table.two center { min-width: 80px; }
@@ -194,8 +202,10 @@ table.eight center { min-width: 380px; }
 table.nine center { min-width: 430px; }
 table.ten center { min-width: 480px; }
 table.eleven center { min-width: 530px; }
-table.twelve center { min-width: 580px; }
+table.twelve center { min-width: @minimum-width; }
 
+
+// Margins of 10px either side of the columns
 table.one .panel center { min-width: 10px; }
 table.two .panel center { min-width: 60px; }
 table.three .panel center { min-width: 110px; }
@@ -254,34 +264,34 @@ td.expander {
 
 table.columns .text-pad,
 table.column .text-pad {
-  padding-left: 10px;
-  padding-right: 10px;
+  padding-left: @padding;
+  padding-right: @padding;
 }
 
 table.columns .left-text-pad,
 table.columns .text-pad-left,
 table.column .left-text-pad,
 table.column .text-pad-left {
-  padding-left: 10px;
+  padding-left: @padding;
 }
 
 table.columns .right-text-pad,
 table.columns .text-pad-right,
 table.column .right-text-pad,
 table.column .text-pad-right {
-  padding-right: 10px;
+  padding-right: @padding;
 }
 
 /* Block Grid */
 
 .block-grid {
   width: 100%;
-  max-width: 580px;
+  max-width: @minimum-width;
 }
 
 .block-grid td {
   display: inline-block;
-  padding:10px;
+  padding:@padding;
 }
 
 .two-up td {
@@ -377,7 +387,7 @@ p.lead, p.lede, p.leed {
 }
 
 p {
-  margin-bottom: 10px;
+  margin-bottom: @padding;
 }
 
 small {
@@ -433,7 +443,7 @@ h6 a:visited {
 .panel {
   background: @col-panel;
   border: 1px solid @col-panel-border;
-  padding: 10px !important;
+  padding: @padding !important;
 }
 
 .sub-grid table {
@@ -613,7 +623,7 @@ body.outlook p {
 
 /*  Media Queries */
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: (@minimum-width + @padding * 2) ) {
 
   table[class="body"] img {
     width: auto !important;
@@ -703,12 +713,12 @@ body.outlook p {
 
   table[class="body"] .right-text-pad,
   table[class="body"] .text-pad-right {
-    padding-left: 10px !important;
+    padding-left: @padding !important;
   }
 
   table[class="body"] .left-text-pad,
   table[class="body"] .text-pad-left {
-    padding-right: 10px !important;
+    padding-right: @padding !important;
   }
 
   table[class="body"] .hide-for-small,
