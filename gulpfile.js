@@ -301,7 +301,7 @@ gulp.task('email', function() {
 
 	var server  = email.server.connect({
 	   user:    "designerzen@outlook.com",
-	   password:"olkwq387!T",
+	   password:"",
 	   host:    "smtp-mail.outlook.com",
 	   tls: {ciphers: "SSLv3"}
 	});
