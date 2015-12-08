@@ -16,6 +16,7 @@
   "license": "MIT",
   "devDependencies": {
     "del": "^2.1.0",
+    "emailjs": "^1.0.1",
     "gulp": "^3.8.8",
     "gulp-concat": "^2.3.4",
     "gulp-htmlmin": "^1.2.0",
@@ -26,6 +27,7 @@
     "gulp-minify": "0.0.5",
     "gulp-newer": "^1.1.0",
     "gulp-premailer": "^0.4.0",
+    "gulp-uncss": "^1.0.4",
     "run-sequence": "^1.0.1",
     "styliner": "^0.8.9"
   }

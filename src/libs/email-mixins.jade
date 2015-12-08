@@ -26,30 +26,34 @@
 
 //- Restrict width to 580px
 mixin container()
-	table.container
+	table.container&attributes(attributes)
 		tr
 			td
 				if block
 					block
 
-//- Fill Containers with Rows!
-mixin row()
-	- var tableClasses = ( attributes.class ) ? 'row '+attributes.class : 'row';
-	table(class!=tableClasses )
-		tr
-			if block
-				block
 
-
-mixin fullWidthRow()
-	table.row
-		tr
-			td(class="center", align="center")
-				center
+mixin fullWidthRow( id , centralise )
+	table.row(id=id)
+		tr&attributes(attributes)
+			if (centralise == true )
+				td(class="center", align="center")
+					center
+						if block
+							block
+			else
+				td
 					if block
 						block
-
-						
+					
+//- Fill Containers with Rows!
+mixin row()
+	table.row
+		tr&attributes(attributes)(class!=tableClasses )
+			td
+				if block
+					block
+									
 //- Fill Rows with Columns!
 mixin column( size, isLast, centralise, offset )
 	- var convertFromNumber = function( sizeInt ){ switch ( sizeInt ){ case 1:return 'one'; case 2:return 'two'; case 3:return 'three'; case 4:return 'four'; case 5:return 'five'; case 6:return 'six'; case 7:return 'seven'; case 8:return 'eight'; case 9:return 'nine'; case 10:return 'ten'; case 11:return 'eleven'; case 12: case 0: default: return 'twelve' } }
@@ -63,7 +67,7 @@ mixin column( size, isLast, centralise, offset )
 	- var tdClasses = (centralise == true ) ? 'center' : ''
 	- var tableClasses = 'column ' + convertedSize;
 	- if (attributes.class) tdClasses += ' '+attributes.class
-	td(class='#{lastClass}')
+	td&attributes(attributes)(class='#{lastClass}')
 		table( class!=tableClasses )
 			tr
 				if (centralise == true )
@@ -88,12 +92,12 @@ mixin subcolumn( size, isLast, centralise )
 	- var convertedSize = !isNaN(parseFloat(size)) && isFinite(size) ? convertFromNumber(size) : size
 	- var lastClass = (isLast == true) ? 'last ' : '' 
 	if (centralise == true )
-		td( class="#{convertedSize} sub-columns center #{lastClass}" )
+		td( class="#{convertedSize} sub-columns center #{lastClass}", attributes )
 			center
 				if block
 					block
 	else
-		td( class="#{convertedSize} sub-columns #{lastClass}" )
+		td( class="#{convertedSize} sub-columns #{lastClass}", attributes )
 			if block
 				block
 				
@@ -110,13 +114,13 @@ mixin blocks( quantity )
 	- var convertedSize = !isNaN(parseFloat(quantity)) && isFinite(quantity) ? convertFromNumber(quantity) : quantity
 	- var blockClasses = 'block-grid '+convertedSize
 	- if (attributes.class) blockClasses += ' '+attributes.class
-	table(class!=blockClasses)
+	table(class!=blockClasses, attributes)
 		tr
 			if block
 				block
 			
 mixin blockContent()
-	td( class!=attributes.class )
+	td( class!=attributes.class, attributes )
 		if block
 			block
 			
@@ -126,7 +130,7 @@ mixin blockContent()
 			
 //- Create a Block Filled Element
 mixin panel()
-	td.panel( class!=attributes.class )
+	td.panel( class!=attributes.class, attributes )
 		if block
 			block
 	td.expander
@@ -136,26 +140,26 @@ mixin expand
 
 //- NB. ENSURE that you have an alt tag!
 //- Alt text is the alternative text that appears when images aren’t loaded in an email
-mixin image( src, centralise, alt )
-	if (centralise != false )
+mixin image( centralise )
+	if (centralise == true )
 		center
-			img(class="center", src=src, alt=alt )
+			img&attributes(attributes).center
 	else
-		img( src=src, alt=alt)
+		img&attributes(attributes)
 
 
-mixin retinaImage( src, width, height, centralise, alt )
-	if (centralise != false )
+mixin retinaImage( centralise )
+	if (centralise == true )
 		center
-			img( class="center", src=src, width=width, height=height, alt=alt )
+			img&attributes(attributes).center
 	else
-		img( src=src, width=width, height=height, alt=alt )
+		img&attributes(attributes)
 	
 
 //- == BUTTONS ====================================================================================
 
 mixin button( link, name )
-	table( class!=attributes.class )
+	table( class!=attributes.class, attributes )
 		tr
 			td
 				
@@ -167,27 +171,27 @@ mixin button( link, name )
 
 mixin tiny-button( link, name )
 	if (attributes.class)
-		+button( link, name )( class='tiny-button #{attributes.class}' )
+		+button( link, name )( class='tiny-button #{attributes.class}', attributes )
 	else
-		+button( link, name )( class='tiny-button' )
+		+button( link, name )( class='tiny-button', attributes )
 	
 
 mixin small-button( link, name )
 	if (attributes.class)
-		+button( link, name )( class='small-button #{attributes.class}' )
+		+button( link, name )( class='small-button #{attributes.class}', attributes )
 	else
-		+button( link, name )( class='small-button' )
+		+button( link, name )( class='small-button', attributes )
 	
 		
 mixin medium-button( link, name )
 	if (attributes.class)
-		+button( link, name )( class='medium-button #{attributes.class}' )
+		+button( link, name )( class='medium-button #{attributes.class}', attributes )
 	else
-		+button( link, name )( class='medium-button' )
+		+button( link, name )( class='medium-button', attributes )
 	
 		
 mixin large-button( link, name )
 	if (attributes.class)
-		+button( link, name )( class='large-button #{attributes.class}' )
+		+button( link, name )( class='large-button #{attributes.class}', attributes )
 	else
-		+button( link, name )( class='large-button' )
+		+button( link, name )( class='large-button', attributes )

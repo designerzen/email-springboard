@@ -12,9 +12,12 @@ html(xmlns="http://www.w3.org/1999/xhtml")
 		//- Replaced during the build process via Premailer
 		//- This is over-ridable if you wish to specify a *different* css file
 		block stylesheets
-			link(rel="stylesheet", href="email.css")
+		link(rel="stylesheet", href="email.css", type="text/css")
 		
 	body
+		//- Gmail previewer goes here
+		block preview
+		
 		table.body
 			tr
 				td(class="center" align="center" valign="top")

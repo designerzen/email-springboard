@@ -25,6 +25,7 @@
 @size-h5: 			   24px;
 @size-h6: 			   20px;
 @size-p:		       18px;
+@size-p-lead:		   18px;
 @size-small: 		   10px;
 
 @border-radius: 	 3px;
@@ -77,6 +78,10 @@ img {
   float: left;
   clear: both;
   display: block;
+
+  margin: 0;
+  border: 0;
+  padding: 0;
 }
 
 center {
@@ -379,15 +384,20 @@ h3 {font-size: @size-h3;}
 h4 {font-size: @size-h4;}
 h5 {font-size: @size-h5;}
 h6 {font-size: @size-h6;}
-body, table.body, p, td {font-size: 14px;line-height:19px;}
+
+body, table.body, p, td {
+  font-size: 14px;
+  line-height:19px;
+}
 
 p.lead, p.lede, p.leed {
-  font-size: @size-p;
   line-height:21px;
+  font-size: @size-p-lead;
 }
 
 p {
   margin-bottom: @padding;
+  font-size: @size-p;
 }
 
 small {
@@ -400,11 +410,11 @@ a {
 }
 
 a:hover {
-  color: @col-button !important;
+  color: @col-link !important;
 }
 
 a:active {
-  color: @col-button !important;
+  color: @col-link !important;
 }
 
 a:visited {
@@ -741,7 +751,7 @@ body.outlook p {
 
 	.mobile_link a[href^="tel"], .mobile_link a[href^="sms"] {
 		text-decoration: default;
-		color: orange !important; /* or whatever your want */
+		color: orange !important;
 		pointer-events: auto;
 		cursor: default;
 	}

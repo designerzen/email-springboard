@@ -26,7 +26,7 @@ var path = require('path');
 var fs = require('fs');
 
 var livereload = require('gulp-livereload');
-
+var uncss = require('gulp-uncss');
 /*
 
 This is just a handy Gulp Boilerplate that
@@ -104,9 +104,10 @@ Prints additional information at runtime.
 
 
 // Set up paths here!
+var DEBUG 								= true;
 var SOURCE_FOLDER 				= 'src/';		// Source files Root
 var BUILD_FOLDER 					= 'build/';		// Where the initial build occurs (debugable)
-var DISTRIBUTION_FOLDER 	= 'dist/';		// Once debugging is complete, copy to server ready files here
+var DISTRIBUTION_FOLDER 	= 'distribute/';		// Once debugging is complete, copy to server ready files here
 
 
 //Options
@@ -153,8 +154,8 @@ options.keepInvalid = true;
 
 // Where do our source files live?
 var source = {
-	styles 	: SOURCE_FOLDER+'*.less',
-	jade 	: SOURCE_FOLDER+'*.jade',
+	styles 	: SOURCE_FOLDER+'email.less',
+	jade 	: SOURCE_FOLDER+'email.jade',
 	jade_examples 	: SOURCE_FOLDER+'examples/*.jade',
 	images	: [
 		SOURCE_FOLDER+'**/*.+(ico|png|gif|jpg|jpeg|svg)',
@@ -184,8 +185,8 @@ var premailerOptions = {
 };
 
 var htmlSquishOptions = {
-	removeComments     : true,
-	collapseWhitespace : true,
+	removeComments     : !DEBUG,
+	collapseWhitespace : !DEBUG,
 	minifyCSS          : true,
 	keepClosingSlash   : true
 };
@@ -222,7 +223,7 @@ gulp.task('jade', function() {
 	// Minify and copy all JavaScript (except vendor scripts)
 	// with sourcemaps all the way down
 	return 	gulp.src( source.jade )
-			.pipe( jade( { pretty:false, debug:false, compileDebug:false } ) )
+			.pipe( jade( { pretty:true, debug:false, compileDebug:false } ) )
 			.pipe( gulp.dest( destination.html ) )
 			.pipe( gulp.dest( distribution.html ) );
 });
@@ -231,7 +232,7 @@ gulp.task('compile-examples', function() {
 	// Minify and copy all JavaScript (except vendor scripts)
 	// with sourcemaps all the way down
 	return 	gulp.src( source.jade_examples )
-			.pipe( jade( { pretty:false, debug:false, compileDebug:false } ) )
+			.pipe( jade( { pretty:DEBUG, debug:false, compileDebug:false } ) )
 			.pipe( gulp.dest( destination.html ) )
 			.pipe( gulp.dest( distribution.html ) );
 });
@@ -287,11 +288,65 @@ gulp.task('convert', function( cb ){
 // Copy all static images & squish
 gulp.task('images', function() {
 	return 	gulp.src( source.images)
-			.pipe( newer(destination.images) )
+			//.pipe( newer(destination.images) )
 			// Pass in options to the task
-			.pipe( imagemin( imageCrunchOptions ) )
+			//.pipe( imagemin( imageCrunchOptions ) )
 			.pipe( gulp.dest( destination.images ) )
 			.pipe( gulp.dest( distribution.images ) );
+});
+
+gulp.task('email', function() {
+
+	var email   = require("emailjs/email");
+
+	var server  = email.server.connect({
+	   user:    "designerzen@outlook.com",
+	   password:"olkwq387!T",
+	   host:    "smtp-mail.outlook.com",
+	   tls: {ciphers: "SSLv3"}
+	});
+
+	/*
+	var server  = email.server.connect({
+	   user:    "designerzen@gmail.com",
+	   password:"gmkwq387!T",
+	   host:    "smtp.gmail.com",
+		 ssl: 		true
+	   //tls: {ciphers: "SSLv3"}
+	});
+	*/
+
+	var emailDir = path.join( __dirname , DISTRIBUTION_FOLDER );
+	var emailFile = path.join( emailDir, 'email.html' );// load in email
+
+	var emailSource = fs.readFileSync( emailFile, 'utf8');
+
+	//console.log(emailSource);
+
+	var message = {
+	   text:    "content as attachment",
+	   from:    "zen <designerzen@outlook.com>",
+	   to:      "jc <john.crickett@flashtalking.com>, zen <designerzen@gmail.com>",
+	   cc:      "",
+	   subject: "Flashtalking Email test",
+	   attachment:
+	   [
+	      {data:emailSource, alternative:true},
+	      //{path:"path/to/file.zip", type:"application/zip", name:"renamed.zip"}
+	   ]
+	};
+
+	// send the message and get a callback with an error or details of the message that was sent
+	server.send(message, function(err, message) {
+		console.log(err || message);
+	});
+
+	// you can continue to send more messages with successive calls to 'server.send',
+	// they will be queued on the same smtp connection
+
+	// or you can create a new server connection with 'email.server.connect'
+	// to asynchronously send individual emails instead of a queue
+
 });
 
 
@@ -299,12 +354,16 @@ gulp.task('images', function() {
 // Cascading Style Sheets ========================================
 
 gulp.task('css', function() {
+	var builtEmailFile = path.join( BUILD_FOLDER, 'email.html' );// load in email
 	return 	gulp.src( source.styles )
-			.pipe( newer( destination.styles ) )
+			//.pipe( newer( destination.styles ) )
 			// compile less
 			.pipe( less( {strictMath: false, compress: true }) )
 			// lint
 			// squish
+			.pipe(uncss({
+            html: [	builtEmailFile ]
+      }))
 			//.pipe( minify() )
 			.pipe( gulp.dest( destination.styles ) )
 			.pipe( gulp.dest( distribution.styles ) );
@@ -343,11 +402,34 @@ gulp.task('watch', function() {
 
 
 // compile all assets & create sourcemaps
-gulp.task('build', 		[ 'css', 'jade', 'images' ] );
+gulp.task('build', function(callback)
+{
+	sequencer(
+		//'clean',
+		[ 'jade', 'images' ],
+		'css',
+		callback
+	);
+});
 
 // squish everything & concatanate scripts
 gulp.task('deploy', 	[ 'build', 'convert' ] );
 gulp.task('distribute', ['deploy'] );
+
+// create a server to host this project
+gulp.task('do', function(callback) {
+	sequencer(
+		'build',
+		'convert',
+    callback);
+});
+
+// create a server to host this project
+gulp.task('go', function(callback) {
+	sequencer(
+		'build',
+    callback);
+});
 
 // create a server to host this project
 gulp.task('serve', 		['images', 'watch'] );
