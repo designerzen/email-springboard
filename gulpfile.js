@@ -155,7 +155,7 @@ options.keepInvalid = true;
 // Where do our source files live?
 var source = {
 	styles 	: SOURCE_FOLDER+'email.less',
-	jade 	: SOURCE_FOLDER+'email.jade',
+	jade 	: SOURCE_FOLDER+'*.jade',
 	jade_examples 	: SOURCE_FOLDER+'examples/*.jade',
 	images	: [
 		SOURCE_FOLDER+'**/*.+(ico|png|gif|jpg|jpeg|svg)',
@@ -309,7 +309,7 @@ gulp.task('email', function() {
 	/*
 	var server  = email.server.connect({
 	   user:    "designerzen@gmail.com",
-	   password:"gmkwq387!T",
+	   password:"",
 	   host:    "smtp.gmail.com",
 		 ssl: 		true
 	   //tls: {ciphers: "SSLv3"}

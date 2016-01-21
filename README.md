@@ -27,14 +27,7 @@ How to use
 -------------
 * Download the Git repo from (Github)[https://github.com/designerzen/email-springboard.git]
 * Install (NodeJS)[https://nodejs.org/en/] (if you have not already installed it)
-* Install (Ruby)[http://rubyinstaller.org/] if not installed _(mac and linux can skip this step)_
-* Restart your computer! *important*
-* Run this command in a DOS prompt :
-
-	> gem install nokogiri
-	> gem install premailer
-	> npm install
-
+* Familiarise yourself with (Zurb's Ink)[http://foundation.zurb.com/emails.html]
 * Edit the email contents in the email.jade file in the src folder
 * Edit the look of the email using the email.less file in the same folder
 * Run gulp in a DOS prompt from the root of the folder
