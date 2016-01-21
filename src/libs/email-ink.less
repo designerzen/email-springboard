@@ -1,38 +1,41 @@
 // Ink v1.0.5 - Copyright 2013 ZURB Inc
 // Converted to Jade and Less by @designerzen
-// Configurable Variables. NB. You can overwrite these in your email.less
+// Configurable Variables. 
+// NB. You can overwrite these in your email.less
+@col-link:		  	#2ba6cb;
 
-@col-link:		  	 #2ba6cb;
+@col-text:			#222222;
 
-@col-text:			   #222222;
+@col-button:	   	#2795b6;
+@col-button-text:	#ffffff;
 
-@col-button:	   	 #2795b6;
-@col-button-text:	 #ffffff;
-
-@col-sucess:		    #5da423;
+@col-sucess:		#5da423;
 @col-sucess-border:	#457a1a;
 
-@col-alert:			    #c60f13;
+@col-alert:			#c60f13;
 @col-alert-border:	#970b0e;
 
-@col-panel:			    #f2f2f2;
+@col-panel:			#f2f2f2;
 @col-panel-border:	#d9d9d9;
 
-@size-h1: 			   40px;
-@size-h2: 			   36px;
-@size-h3: 			   32px;
-@size-h4: 			   28px;
-@size-h5: 			   24px;
-@size-h6: 			   20px;
-@size-p:		       18px;
-@size-p-lead:		   18px;
-@size-small: 		   10px;
+@size-h1: 			40px;
+@size-h2: 			36px;
+@size-h3: 			32px;
+@size-h4: 			28px;
+@size-h5: 			24px;
+@size-h6: 			20px;
+@size-p:			18px;
+@size-p-lead:		18px;
+@size-small: 		10px;
+
+
+@font-family: 		"HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+@font-weight: 		normal;
 
 @border-radius: 	 3px;
 
-
-@minimum-width:     590px;
-@padding:           10px;
+@minimum-width:		590px;
+@padding:			10px;
 
 /* Client-specific Styles & Reset */
 
@@ -361,21 +364,19 @@ img.center {
 /* Typography */
 
 body, table.body, h1, h2, h3, h4, h5, h6, p, td {
-  color: @col-text;
+	color: @col-text;
 
-  //font-family: "Helvetica", "Arial", sans-serif;
-  //font-weight: normal;
-  font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-  font-weight: 300;
+	font-family: @font-family;
+	font-weight: @font-weight;
 
-  padding:0;
-  margin: 0;
-  text-align: left;
-  line-height: 1.3;
+	padding:0;
+	margin: 0;
+	text-align: left;
+	line-height: 1.3;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  word-break: normal;
+	word-break: normal;
 }
 
 h1 {font-size: @size-h1;}
