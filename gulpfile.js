@@ -9,7 +9,7 @@ var concat = require('gulp-concat');			// combine files
 // JS Plugins
 var minify = require('gulp-minify');			// squash files
 
-var newer = require('gulp-newer');				// deal with only modified files
+//var newer = require('gulp-newer');				// deal with only modified files
 var imagemin = require('gulp-imagemin');		// squish images
 
 // CSS Plugins
@@ -17,7 +17,7 @@ var less = require('gulp-less');				// compile less files to css
 
 // HTML Plugins
 var jade = require('gulp-jade');
-var premailer = require('gulp-premailer');
+//var premailer = require('gulp-premailer');
 var htmlmin = require('gulp-htmlmin');
 
 var del = require('del');						// delete things and folders
@@ -25,7 +25,6 @@ var sequencer = require('run-sequence');
 var path = require('path');
 var fs = require('fs');
 
-var livereload = require('gulp-livereload');
 var uncss = require('gulp-uncss');
 /*
 
@@ -155,7 +154,10 @@ options.keepInvalid = true;
 // Where do our source files live?
 var source = {
 	styles 	: SOURCE_FOLDER+'email.less',
-	jade 	: SOURCE_FOLDER+'*.jade',
+	jade 	: [
+		SOURCE_FOLDER + '*.jade',
+		'!' + SOURCE_FOLDER + '*base*'
+	],
 	jade_examples 	: SOURCE_FOLDER+'examples/*.jade',
 	images	: [
 		SOURCE_FOLDER+'**/*.+(ico|png|gif|jpg|jpeg|svg)',
@@ -239,7 +241,7 @@ gulp.task('compile-examples', function() {
 
 gulp.task('assemble', function () {
     return gulp.src( destination.html +'*.html')
-			.pipe( premailer(premailerOptions) )
+			//.pipe( premailer(premailerOptions) )
 			.pipe( htmlmin(htmlSquishOptions) )
 			.pipe( gulp.dest( destination.html ) )
 			.pipe( gulp.dest( distribution.html ) );
@@ -369,19 +371,6 @@ gulp.task('css', function() {
 			.pipe( gulp.dest( distribution.styles ) );
 });
 
-
-// Utilities =====================================================
-
-// Rerun the task when a file changes
-gulp.task('watch', function() {
-
-  // Create LiveReload server
-  livereload.listen();
-
-  // Watch any files in dist/, reload on change
-  gulp.watch(['src/**']).on('change', livereload.changed);
-
-});
 // =======================---------------- TASKS --------------------
 
 /*

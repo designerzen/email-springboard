@@ -18,17 +18,15 @@
     "del": "^2.1.0",
     "emailjs": "^1.0.1",
     "gulp": "^3.9.0",
-    "gulp-concat": "^2.3.4",
-    "gulp-htmlmin": "^1.2.0",
+    "gulp-concat": "^2.6.0",
+    "gulp-htmlmin": "^1.3.0",
     "gulp-imagemin": "^2.4.0",
     "gulp-jade": "^1.1.0",
     "gulp-less": "^3.0.5",
-    "gulp-livereload": "^3.8.1",
     "gulp-minify": "0.0.5",
     "gulp-newer": "^1.1.0",
-    "gulp-premailer": "^0.4.0",
     "gulp-uncss": "^1.0.4",
-    "run-sequence": "^1.0.1",
+    "run-sequence": "^1.1.5",
     "styliner": "^0.8.9"
   }
 }
