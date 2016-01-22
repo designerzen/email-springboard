@@ -1,6 +1,6 @@
 // Ink v1.0.5 - Copyright 2013 ZURB Inc
 // Converted to Jade and Less by @designerzen
-// Configurable Variables. 
+// Configurable Variables.
 // NB. You can overwrite these in your email.less
 @col-link:		  	#2ba6cb;
 
@@ -36,9 +36,9 @@
 
 @minimum-width:		580px;	// 580px is a good size!
 @padding:			10px;
+@padding-panel: 	20px;
 
 /* Client-specific Styles & Reset */
-
 #outlook a {
   padding:0;
 }
@@ -128,7 +128,7 @@ hr {
   border: none;
 }
 
-/* Responsive Grid */
+// Responsive Grid ==========================================
 
 table.body {
   height: 100%;
@@ -184,48 +184,62 @@ table.container td.last {
 
 // Ensure that @minimum-width / 12
 @column-gap : @minimum-width / 12;
-@column-width : @minimum-width / 12;
-
-table.one { width: 30px; }
-table.two { width: 80px; }
-table.three { width: 130px; }
-table.four { width: 180px; }
-table.five { width: 230px; }
-table.six { width: 280px; }
-table.seven { width: 330px; }
-table.eight { width: 380px; }
-table.nine { width: 430px; }
-table.ten { width: 480px; }
-table.eleven { width: 530px; }
-table.twelve { width: @minimum-width; }
-
-table.one center { min-width: 30px; }
-table.two center { min-width: 80px; }
-table.three center { min-width: 130px; }
-table.four center { min-width: 180px; }
-table.five center { min-width: 230px; }
-table.six center { min-width: 280px; }
-table.seven center { min-width: 330px; }
-table.eight center { min-width: 380px; }
-table.nine center { min-width: 430px; }
-table.ten center { min-width: 480px; }
-table.eleven center { min-width: 530px; }
-table.twelve center { min-width: @minimum-width; }
+@column-width : (@padding *2 + @minimum-width) / 12;
+@column-width-offset : @padding * 3;			// 30px;
+@column-width-factor : @column-width;	// 50px
+@column-padding : @padding * 2;
+// This is a compound of margins
+// column width is the amount in pixels of one column,
+// not considering any padding
+// 50 pixels difference
+.table-width( @columns ;  )
+{
+	@fenceposts: @columns - 1;
+	@used : @column-padding * @fenceposts;
+	width: (@minimum-width -  @used ) / @columns;
+}
 
 
-// Margins of 10px either side of the columns
-table.one .panel center { min-width: 10px; }
-table.two .panel center { min-width: 60px; }
-table.three .panel center { min-width: 110px; }
-table.four .panel center { min-width: 160px; }
-table.five .panel center { min-width: 210px; }
-table.six .panel center { min-width: 260px; }
-table.seven .panel center { min-width: 310px; }
-table.eight .panel center { min-width: 360px; }
-table.nine .panel center { min-width: 410px; }
-table.ten .panel center { min-width: 460px; }
-table.eleven .panel center { min-width: 510px; }
-table.twelve .panel center { min-width: 560px; }
+table.one { 			width: (@column-width-offset + 0 * @column-width-factor); }
+table.two { 			width: (@column-width-offset + 1 * @column-width-factor); }
+table.three { 			width: (@column-width-offset + 2 * @column-width-factor); }
+table.four { 			width: (@column-width-offset + 3 * @column-width-factor); }
+table.five { 			width: (@column-width-offset + 4 * @column-width-factor); }
+table.six { 			width: (@column-width-offset + 5 * @column-width-factor); }
+table.seven { 			width: (@column-width-offset + 6 * @column-width-factor); }
+table.eight { 			width: (@column-width-offset + 7 * @column-width-factor); }
+table.nine { 			width: (@column-width-offset + 8 * @column-width-factor); }
+table.ten { 			width: (@column-width-offset + 9 * @column-width-factor); }
+table.eleven { 			width: (@column-width-offset + 10 * @column-width-factor); }
+table.twelve { 			width: (@column-width-offset + 11 * @column-width-factor); }
+
+table.one center { 		min-width: (@column-width-offset + 0 * @column-width-factor); }
+table.two center { 		min-width: (@column-width-offset + 1* @column-width-factor); }
+table.three center {	min-width: (@column-width-offset + 2 * @column-width-factor); }
+table.four center { 	min-width: (@column-width-offset + 3 * @column-width-factor); }
+table.five center { 	min-width: (@column-width-offset + 4 * @column-width-factor); }
+table.six center { 		min-width: (@column-width-offset + 5 * @column-width-factor); }
+table.seven center { 	min-width: (@column-width-offset + 6 * @column-width-factor); }
+table.eight center { 	min-width: (@column-width-offset + 7 * @column-width-factor); }
+table.nine center { 	min-width: (@column-width-offset + 8 * @column-width-factor); }
+table.ten center { 		min-width: (@column-width-offset + 9 * @column-width-factor); }
+table.eleven center {	min-width: (@column-width-offset + 10 * @column-width-factor); }
+table.twelve center { 	min-width: (@column-width-offset + 11 * @column-width-factor); }
+
+
+// Margins of 10px on one side of the column
+table.one .panel center { min-width: ((0 * @column-width-factor) + (@padding)); }
+table.two .panel center { min-width: ((1 * @column-width-factor) + (@padding)); }
+table.three .panel center { min-width: ((2 * @column-width-factor) + (@padding)); }
+table.four .panel center { min-width: ((3 * @column-width-factor) + (@padding)); }
+table.five .panel center { min-width: ((4 * @column-width-factor) + (@padding)); }
+table.six .panel center { min-width: ((5 * @column-width-factor) + (@padding)); }
+table.seven .panel center { min-width: ((6 * @column-width-factor) + (@padding)); }
+table.eight .panel center { min-width: ((7 * @column-width-factor) + (@padding)); }
+table.nine .panel center { min-width: ((8 * @column-width-factor) + (@padding)); }
+table.ten .panel center { min-width: ((9 * @column-width-factor) + (@padding)); }
+table.eleven .panel center { min-width: ((10 * @column-width-factor) + (@padding)); }
+table.twelve .panel center { min-width: ((11 * @column-width-factor) + (@padding)); }
 
 .body .columns td.one,
 .body .column td.one { width: 8.333333%; }
@@ -252,17 +266,17 @@ table.twelve .panel center { min-width: 560px; }
 .body .columns td.twelve,
 .body .column td.twelve { width: 100%; }
 
-td.offset-by-one { padding-left: 50px; }
-td.offset-by-two { padding-left: 100px; }
-td.offset-by-three { padding-left: 150px; }
-td.offset-by-four { padding-left: 200px; }
-td.offset-by-five { padding-left: 250px; }
-td.offset-by-six { padding-left: 300px; }
-td.offset-by-seven { padding-left: 350px; }
-td.offset-by-eight { padding-left: 400px; }
-td.offset-by-nine { padding-left: 450px; }
-td.offset-by-ten { padding-left: 500px; }
-td.offset-by-eleven { padding-left: 550px; }
+td.offset-by-one { padding-left: (@column-width-factor * 1); }
+td.offset-by-two { padding-left: (@column-width-factor * 2); }
+td.offset-by-three { padding-left: (@column-width-factor * 3); }
+td.offset-by-four { padding-left: (@column-width-factor * 4); }
+td.offset-by-five { padding-left: (@column-width-factor * 5); }
+td.offset-by-six { padding-left: (@column-width-factor * 6); }
+td.offset-by-seven { padding-left: (@column-width-factor * 7); }
+td.offset-by-eight { padding-left: (@column-width-factor * 8); }
+td.offset-by-nine { padding-left: (@column-width-factor * 9); }
+td.offset-by-ten { padding-left: (@column-width-factor * 10); }
+td.offset-by-eleven { padding-left: (@column-width-factor * 11); }
 
 td.expander {
   visibility: hidden;
@@ -361,7 +375,7 @@ img.center {
   display: none;
 }
 
-/* Typography */
+// Typography ====================================================
 
 body, table.body, h1, h2, h3, h4, h5, h6, p, td {
 	color: @col-text;
@@ -379,12 +393,12 @@ h1, h2, h3, h4, h5, h6 {
 	word-break: normal;
 }
 
-h1 {font-size: @size-h1;}
-h2 {font-size: @size-h2;}
-h3 {font-size: @size-h3;}
-h4 {font-size: @size-h4;}
-h5 {font-size: @size-h5;}
-h6 {font-size: @size-h6;}
+h1 {	font-size: @size-h1;}
+h2 {	font-size: @size-h2;}
+h3 {	font-size: @size-h3;}
+h4 {	font-size: @size-h4;}
+h5 {	font-size: @size-h5;}
+h6 {	font-size: @size-h6;}
 
 body, table.body, p, td {
   font-size: 14px;
@@ -407,7 +421,7 @@ small {
 
 a {
   color: @col-link;
-  text-decoration: none;
+  //text-decoration: none;
 }
 
 a:hover {
@@ -449,12 +463,12 @@ h6 a:visited {
   color: @col-link !important;
 }
 
-/* Panels */
+// Panels ======================================================
 
 .panel {
   background: @col-panel;
   border: 1px solid @col-panel-border;
-  padding: @padding !important;
+  padding: @padding-panel !important;
 }
 
 .sub-grid table {
@@ -465,7 +479,7 @@ h6 a:visited {
   padding-bottom: 0;
 }
 
-/* Buttons */
+// Buttons ======================================================
 
 table.button,
 table.tiny-button,
@@ -619,20 +633,21 @@ table.radius td {
   border-radius: @border-radius;
 }
 
+// hmm, needs fixing...
 table.round td {
   -webkit-border-radius: 500px;
   -moz-border-radius: 500px;
   border-radius: 500px;
 }
 
-/* Outlook First */
+// Outlook First ========================================================
 
 body.outlook p {
   display: inline !important;
 }
 
 
-/*  Media Queries */
+//  Media Queries =======================================================
 
 @media only screen and (max-width: (@minimum-width + @padding * 2) ) {
 
@@ -742,14 +757,20 @@ body.outlook p {
     display: inherit !important;
   }
 
-	// A nice and clean way to target phone numbers you want clickable and avoid a mobile phone from linking other numbers that look like, but are not phone numbers.  Use these two blocks of code to "unstyle" any numbers that may be linked.  The second block gives you a class to apply with a span tag to the numbers you would like linked and styled. Inspired by Campaign Monitor's article on using phone numbers in email: http://www.campaignmonitor.com/blog/post/3571/using-phone-numbers-in-html-email/.
+	// A nice and clean way to target phone numbers you want clickable 
+	// and avoid a mobile phone from linking other numbers that look like, 
+	// but are not phone numbers.
+	// Use these two blocks of code to "unstyle" any numbers that may be linked.  
 	a[href^="tel"], a[href^="sms"] {
 		text-decoration: none;
 		color: @col-text;
 		pointer-events: none;
 		cursor: default;
 	}
-
+	
+	// This block gives you a class to apply with a span tag to the numbers you would like linked and styled.
+	// Inspired by Campaign Monitor's article on using phone numbers in email: 
+	// http://www.campaignmonitor.com/blog/post/3571/using-phone-numbers-in-html-email/.
 	.mobile_link a[href^="tel"], .mobile_link a[href^="sms"] {
 		text-decoration: default;
 		color: orange !important;
